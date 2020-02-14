@@ -154,19 +154,13 @@ public class StaticSet<E> implements Set<E> {
 		return this.isSubSet(S2) && S2.isSubSet(this);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("unchecked")
 	public static boolean checkDisjoint(Object[] sets) {
+		Set<Integer> inters = ((Set<Integer>)sets[0]);
 		for (int i = 1; i < sets.length; i++) {
-			for (int j = i + 1; j < sets.length; j++) {
-				Set temp1 = (Set) sets[i];
-				Set temp2 = (Set) sets[j];
-				if(temp1.intersection(temp2).size() == 0) {
-					return true;
-				}
-				
-			}
+			inters = inters.intersection(((Set<Integer>)sets[i]));
 		}
-		return false;
+		return inters.isEmpty();
 	}
 
 	//SINGLETON SETS
