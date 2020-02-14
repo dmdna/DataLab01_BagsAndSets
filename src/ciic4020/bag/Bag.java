@@ -1,5 +1,6 @@
 package ciic4020.bag;
 
+@SuppressWarnings("rawtypes")
 public interface Bag extends Iterable {
 
 	public void add(Object obj);

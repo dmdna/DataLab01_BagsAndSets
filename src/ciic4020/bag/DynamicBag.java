@@ -12,6 +12,7 @@ public class DynamicBag implements Bag {
 		this.maxSize = initialCapacity;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Iterator iterator() {
 		return this.bag.iterator();
@@ -73,6 +74,7 @@ public class DynamicBag implements Bag {
 		return this.bag.isEmpty();
 	}
 	
+	//MORE FREQUENT THAN
 	@Override
 	public Bag moreFrequentThan(Object obj) {
 		Bag res = new DynamicBag(this.size());

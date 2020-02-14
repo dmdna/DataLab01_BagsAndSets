@@ -80,19 +80,60 @@ public class SetLabTest {
 		S3.add("Apu");
 		S3.add("Ned");
 		S3.add("Amy");
-		
 		printSet(S3);
+		
+		
 		System.out.println("Is S3 equal to theSet?: " + S3.equals(theSet));
 		System.out.println("Is theSet equal to S3?: " + theSet.equals(S3));
 		System.out.println("Is S3 equal to S2?: " + S3.equals(S2));
+		
+		
+		//DISJOINT TESTER
+		theSet.clear();
+		S2.clear();
+		S3.clear();
+		
+		theSet.add("Amy");
+		theSet.add("Bob");
+		theSet.add("Jil");
+		printSet(theSet);
+		
+		S2.add("Ned");
+		S2.add("Bob");
+		printSet(S2);
+		
+		S3.add("Moe");
+		S3.add("Apu");
+		printSet(S3);
+		
+		Object[] sets = {theSet, S2, S3};
+		
+		System.out.println("Check Disjoint (should be true): " + checkDisjoint(sets));
+		
+		S3.add("Bob");
+		printSet(S3);
+		
+		System.out.println("Check Disjoint (should be false): " + checkDisjoint(sets));
+		
 		
 		System.out.println("Done!");
 		in.close();
 	}
 
+	@SuppressWarnings("rawtypes")
 	private static void printSet(Set theSet) {
 		for (Object obj : theSet)
 			System.out.println(obj);
 		System.out.println("Set size: " + theSet.size());
+	}
+	
+	//CHECK DISJOINT
+	@SuppressWarnings("unchecked")
+	public static boolean checkDisjoint(Object[] sets) {
+		Set<Integer> inters = ((Set<Integer>)sets[0]);
+		for (int i = 1; i < sets.length; i++) {
+			inters = inters.intersection(((Set<Integer>)sets[i]));
+		}
+		return inters.isEmpty();
 	}
 }

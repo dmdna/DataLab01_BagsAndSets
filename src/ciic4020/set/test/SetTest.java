@@ -76,6 +76,7 @@ public class SetTest {
 		in.close();
 	}
 
+	@SuppressWarnings("rawtypes")
 	private static void printSet(Set theSet) {
 		for (Object obj : theSet)
 			System.out.println(obj);

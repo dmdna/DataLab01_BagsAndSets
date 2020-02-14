@@ -35,6 +35,7 @@ public class DynamicSet<E> implements Set<E> {
 		return this.theSet.add(obj);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void copySet(Set<E> src, Set<E> dst) {
 		for (Object obj : src)
 			dst.add((E) obj);
@@ -94,9 +95,31 @@ public class DynamicSet<E> implements Set<E> {
 		return this.theSet.isSubSet(S2);
 	}
 	
+	//EQUALS
 	@Override
 	public boolean equals(Set<E> S2) {
-		return this.theSet.isSubSet(S2) && S2.isSubSet(this.theSet);
+		return this.isSubSet(S2) && S2.isSubSet(this);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static boolean checkDisjoint(Object[] sets) {
+		for (int i = 1; i < sets.length; i++) {
+			for (int j = i + 1; j < sets.length; j++) {
+				Set temp1 = (Set) sets[i];
+				Set temp2 = (Set) sets[j];
+				if(temp1.intersection(temp2).size() == 0) {
+					return true;
+				}
+				
+			}
+		}
+		return false;
+	}
+	
+	//SINGLETON SETS
+	@Override
+	public Set<Set<E>> singletonSets() {
+		return this.theSet.singletonSets();
 	}
 
 }

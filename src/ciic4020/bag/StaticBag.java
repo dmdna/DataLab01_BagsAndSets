@@ -11,6 +11,7 @@ public class StaticBag implements Bag {
 	// current size
 	private int currentSize;
 	
+	@SuppressWarnings("rawtypes")
 	private class BagIterator implements Iterator {
 		private int currentPosition;
 
@@ -105,11 +106,13 @@ public class StaticBag implements Bag {
 		return this.size() == 0;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Iterator iterator() {
 		return new BagIterator();
 	}
 
+	//MORE FREQUENT THAN
 	@Override
 	public Bag moreFrequentThan(Object obj) {
 		Bag res = new DynamicBag(this.size());

@@ -13,6 +13,7 @@ public class StaticSet<E> implements Set<E> {
 	
 	private static final int DEFAULT_SET_SIZE = 10;
 	
+	@SuppressWarnings("unchecked")
 	public StaticSet(int maxCapacity) {
 		if (maxCapacity < 1)
 			throw new IllegalArgumentException("Max capacity must be at least 1");
@@ -32,6 +33,7 @@ public class StaticSet<E> implements Set<E> {
 			return this.currentPosition < size();
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public T next() {
 			if (this.hasNext()) {
@@ -95,6 +97,7 @@ public class StaticSet<E> implements Set<E> {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<E> union(Set<E> S2) {
 		Set<E> S3 = new StaticSet<E>(DEFAULT_SET_SIZE);
@@ -113,6 +116,7 @@ public class StaticSet<E> implements Set<E> {
 		return S3;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<E> difference(Set<E> S2) {
 		Set<E> S3 = new StaticSet<E>(DEFAULT_SET_SIZE);
@@ -130,6 +134,7 @@ public class StaticSet<E> implements Set<E> {
 		return this.difference(this.difference(S2));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isSubSet(Set<E> S2) {
 		for (Object obj : this)
@@ -143,9 +148,39 @@ public class StaticSet<E> implements Set<E> {
 		return new SetIterator<E>();
 	}
 	
+	//EQUALS
 	@Override
 	public boolean equals(Set<E> S2) {
 		return this.isSubSet(S2) && S2.isSubSet(this);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static boolean checkDisjoint(Object[] sets) {
+		for (int i = 1; i < sets.length; i++) {
+			for (int j = i + 1; j < sets.length; j++) {
+				Set temp1 = (Set) sets[i];
+				Set temp2 = (Set) sets[j];
+				if(temp1.intersection(temp2).size() == 0) {
+					return true;
+				}
+				
+			}
+		}
+		return false;
+	}
+
+	//SINGLETON SETS
+	@Override
+	public Set<Set<E>> singletonSets() {
+		Set<Set<E>> result = new StaticSet<Set<E>>(this.size());
+		Iterator<E> check = this.iterator();
+		while(check.hasNext()) {
+			Set<E> innerSet = new StaticSet<E>(1);
+			innerSet.add(check.next());
+			result.add(innerSet);
+		}
+		return result;
+	
 	}
 
 }
