@@ -108,12 +108,12 @@ public class SetLabTest {
 		
 		Object[] sets = {theSet, S2, S3};
 		
-		System.out.println("Check Disjoint (should be true): " + checkDisjoint(sets));
+		System.out.println("Check Disjoint (should be true): " + DynamicSet.checkDisjoint(sets));
 		
 		S3.add("Bob");
 		printSet(S3);
 		
-		System.out.println("Check Disjoint (should be false): " + checkDisjoint(sets));
+		System.out.println("Check Disjoint (should be false): " + DynamicSet.checkDisjoint(sets));
 		
 		
 		System.out.println("Done!");
@@ -125,15 +125,5 @@ public class SetLabTest {
 		for (Object obj : theSet)
 			System.out.println(obj);
 		System.out.println("Set size: " + theSet.size());
-	}
-	
-	//CHECK DISJOINT
-	@SuppressWarnings("unchecked")
-	public static boolean checkDisjoint(Object[] sets) {
-		Set<Integer> inters = ((Set<Integer>)sets[0]);
-		for (int i = 1; i < sets.length; i++) {
-			inters = inters.intersection(((Set<Integer>)sets[i]));
-		}
-		return inters.isEmpty();
 	}
 }
