@@ -95,12 +95,13 @@ public class DynamicSet<E> implements Set<E> {
 		return this.theSet.isSubSet(S2);
 	}
 	
-	//EQUALS
+	//LAB 01: EQUALS
 	@Override
 	public boolean equals(Set<E> S2) {
-		return this.isSubSet(S2) && S2.isSubSet(this);
+		return this.theSet.equals(S2);
 	}
 	
+	//LAB 01: CHECK DISJOINT
 	@SuppressWarnings("unchecked")
 	public static boolean checkDisjoint(Object[] sets) {
 		Set<Integer> inters = ((Set<Integer>)sets[0]);
@@ -110,7 +111,7 @@ public class DynamicSet<E> implements Set<E> {
 		return inters.isEmpty();
 	}
 	
-	//SINGLETON SETS
+	//LAB 01: SINGLETON SETS
 	@Override
 	public Set<Set<E>> singletonSets() {
 		return this.theSet.singletonSets();

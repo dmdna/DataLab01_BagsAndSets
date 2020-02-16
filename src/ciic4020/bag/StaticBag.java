@@ -112,18 +112,18 @@ public class StaticBag implements Bag {
 		return new BagIterator();
 	}
 
-	//MORE FREQUENT THAN
+	//LAB 01: MORE FREQUENT THAN
 	@Override
 	public Bag moreFrequentThan(Object obj) {
-		Bag res = new DynamicBag(this.size());
+		Bag result = new DynamicBag(this.size());
 		int objCount = this.count(obj);
 		
 		for (Object o : this) {
-			if (this.count(o) > objCount && !res.isMember(o)) {
-				res.add(o);
+			if (this.count(o) > objCount && !result.isMember(o)) {
+				result.add(o);
 			}
 		}
-		return res;
+		return result;
 	}
 
 }

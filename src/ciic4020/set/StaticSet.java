@@ -148,12 +148,13 @@ public class StaticSet<E> implements Set<E> {
 		return new SetIterator<E>();
 	}
 	
-	//EQUALS
+	//LAB 01: EQUALS
 	@Override
 	public boolean equals(Set<E> S2) {
 		return this.isSubSet(S2) && S2.isSubSet(this);
 	}
 	
+	//LAB 01: CHECK DISJOINT
 	@SuppressWarnings("unchecked")
 	public static boolean checkDisjoint(Object[] sets) {
 		Set<Integer> inters = ((Set<Integer>)sets[0]);
@@ -163,7 +164,7 @@ public class StaticSet<E> implements Set<E> {
 		return inters.isEmpty();
 	}
 
-	//SINGLETON SETS
+	//LAB 01: SINGLETON SETS
 	@Override
 	public Set<Set<E>> singletonSets() {
 		Set<Set<E>> result = new StaticSet<Set<E>>(this.size());

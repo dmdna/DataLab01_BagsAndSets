@@ -74,18 +74,10 @@ public class DynamicBag implements Bag {
 		return this.bag.isEmpty();
 	}
 	
-	//MORE FREQUENT THAN
+	//LAB 01: MORE FREQUENT THAN
 	@Override
 	public Bag moreFrequentThan(Object obj) {
-		Bag res = new DynamicBag(this.size());
-		int objCount = this.count(obj);
-		
-		for (Object o : this) {
-			if (this.count(o) > objCount && !res.isMember(o)) {
-				res.add(o);
-			}
-		}
-		return res;
+		return this.bag.moreFrequentThan(obj);
 	}
 
 }
